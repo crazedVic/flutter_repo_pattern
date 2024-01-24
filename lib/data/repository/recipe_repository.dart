@@ -1,13 +1,23 @@
+import 'package:repopattern/data.dart';
+
+import '../database/recipe_dao.dart';
 import '../entity/recipe.dart';
-import '../network/api_client.dart';
+import '../api/recipe_api.dart';
 
 class RecipeRepository{
-  final ApiClient apiClient;
+  final RecipeApi recipeApi;
+  final RecipeDao recipeDao;
 
-  RecipeRepository({required this.apiClient});
+  RecipeRepository({required this.recipeApi, required this.recipeDao});
 
   Future<List<Recipe>> getRecipes({String search = "soup"}) async {
-    final response = await apiClient.getRecipes(search);
-    return response;
+
+    if (serverless) {
+      return await recipeDao.selectAll();
+    }
+    else {
+      return await recipeApi.getRecipes(search);
+    }
+
   }
 }

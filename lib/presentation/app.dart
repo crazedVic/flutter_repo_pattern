@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../data.dart';
+import '../data/database/recipe_dao.dart';
 import '../data/entity/recipe.dart';
 import '../data/repository/recipe_repository.dart';
-import '../data/network/api_client.dart';
+import '../data/api/recipe_api.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -12,7 +13,8 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return
       Provider<RecipeRepository>(create: (_) => RecipeRepository(
-          apiClient: ApiClient(baseUrl: baseUrl, apiKey: apiKey)
+          recipeApi: RecipeApi(baseUrl: baseUrl, apiKey: apiKey),
+          recipeDao: RecipeDao()
       ),
       child: const MaterialApp(
         home: Home(),
@@ -28,7 +30,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Recipes")),
+        title: const Text("Recipes ${serverless? "[Offline]" : "[Online]"}")),
       body: FutureBuilder<List<Recipe>>(
         future: Provider.of<RecipeRepository>(context).getRecipes(search: "noodles"),
         builder: (BuildContext context, AsyncSnapshot<List<Recipe>> snapshot) {
@@ -38,11 +40,11 @@ class Home extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final recipe = snapshot.data![index];
                   return ListTile(
-                    leading: const SizedBox(
+                    leading:  SizedBox(
                       width:48,
                       height:48.0,
                       child: ClipOval(
-                        child: Placeholder(),// Image.network('https://www.clker.com/cliparts/k/v/A/g/l/E/recipe-icon.svg'),
+                        child: Image.network("https://picsum.photos/250?image=55"),
                       ),
                     ),
                     title: Text(recipe.title)

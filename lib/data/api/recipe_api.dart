@@ -2,11 +2,11 @@ import 'dart:convert';
 import 'dart:io';
 import '../entity/recipe.dart';
 import 'package:http/http.dart' as http;
-class ApiClient {
+class RecipeApi {
   final String baseUrl;
   final String apiKey;
 
-  ApiClient({required this.baseUrl, required this.apiKey});
+  RecipeApi({required this.baseUrl, required this.apiKey});
 
   Future<List<Recipe>> getRecipes(String search) async {
     try {
