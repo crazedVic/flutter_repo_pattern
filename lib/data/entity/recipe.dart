@@ -26,10 +26,10 @@ class Recipe{
     instructions = map['instructions'] as String;
 
   Map<String, dynamic> toRow() => {
-    title: title,
-    ingredients: ingredients,
-    servings: servings,
-    instructions: instructions,
+    'title': title,
+    'ingredients': ingredients,
+    'servings': servings,
+    'instructions': instructions,
   };
   Recipe({required this.title, required this.ingredients, required this.servings, required this.instructions}); // this method lives in the generated class file ***.g.dart
 }

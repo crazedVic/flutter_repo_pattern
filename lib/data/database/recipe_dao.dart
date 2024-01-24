@@ -14,6 +14,7 @@ class RecipeDao extends BaseDao{
     final db = await getDatabase();
     final batch = db.batch();
     for (final recipe in recipes){
+      batch.delete(BaseDao.recipeTableName);
       batch.insert(BaseDao.recipeTableName, recipe.toRow());
     }
     await batch.commit();

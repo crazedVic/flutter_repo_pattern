@@ -30,6 +30,19 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: serverless ? [
+          TextButton(
+            onPressed: () {
+              Provider.of<RecipeRepository>(context, listen:false).sync();
+            },
+            child: const Text(
+              'Sync',
+              style: TextStyle(
+                color: Colors.black, // Text color (use a contrasting color for better visibility)
+              ),
+            ),
+          ),
+        ] : [],
         title: const Text("Recipes ${serverless? "[Offline]" : "[Online]"}")),
       body: FutureBuilder<List<Recipe>>(
         future: Provider.of<RecipeRepository>(context).getRecipes(search: "noodles"),

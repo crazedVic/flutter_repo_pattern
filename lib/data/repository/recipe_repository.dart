@@ -18,6 +18,11 @@ class RecipeRepository{
     else {
       return await recipeApi.getRecipes(search);
     }
+  }
 
+  Future<List<Recipe>> sync() async {
+    final recipes = await recipeApi.getRecipes("soup");
+    recipeDao.insertAll(recipes);
+    return await recipeDao.selectAll();
   }
 }
