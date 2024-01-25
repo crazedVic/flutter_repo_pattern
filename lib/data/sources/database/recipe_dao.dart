@@ -1,6 +1,5 @@
-import 'package:repopattern/data/database/base_dao.dart';
-
-import '../entity/recipe.dart';
+import 'package:repopattern/data/sources/database/base_dao.dart';
+import '../../../domain/entities/recipe.dart';
 
 class RecipeDao extends BaseDao{
   Future<List<Recipe>> selectAll() async {

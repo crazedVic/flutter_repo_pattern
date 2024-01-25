@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import '../entity/recipe.dart';
+import '../../../domain/entities/recipe.dart';
 import 'package:http/http.dart' as http;
 class RecipeApi {
   final String baseUrl;

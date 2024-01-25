@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../data.dart';
-import '../data/database/recipe_dao.dart';
-import '../data/entity/recipe.dart';
-import '../data/repository/recipe_repository.dart';
-import '../data/api/recipe_api.dart';
+import '../../shared/data.dart';
+import '../../data/sources/database/recipe_dao.dart';
+import '../../../domain/entities/recipe.dart';
+import '../../data/repositories/recipe_repository.dart';
+import '../../data/sources/api/recipe_api.dart';
+import '../widgets/recipe_tile.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -53,13 +54,7 @@ class Home extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final recipe = snapshot.data![index];
                   return ListTile(
-                    leading:  SizedBox(
-                      width:48,
-                      height:48.0,
-                      child: ClipOval(
-                        child: Image.network("https://picsum.photos/250?image=55"),
-                      ),
-                    ),
+                    leading:  RecipeTile(),
                     title: Text(recipe.title)
                   );
                 },
@@ -82,4 +77,6 @@ class Home extends StatelessWidget {
     );
   }
 }
+
+
 

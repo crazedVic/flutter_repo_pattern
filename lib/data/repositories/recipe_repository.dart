@@ -1,8 +1,8 @@
-import 'package:repopattern/data.dart';
+import 'package:repopattern/shared/data.dart';
 
-import '../database/recipe_dao.dart';
-import '../entity/recipe.dart';
-import '../api/recipe_api.dart';
+import '../sources/database/recipe_dao.dart';
+import '../../domain/entities/recipe.dart';
+import '../sources/api/recipe_api.dart';
 
 class RecipeRepository{
   final RecipeApi recipeApi;
