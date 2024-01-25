@@ -30,7 +30,6 @@ class RecipeApi {
         }
     }
     on HttpException catch (e) {
-        print(e.message);
         throw HttpException(e.message);
     }
   }

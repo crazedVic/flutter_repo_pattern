@@ -46,7 +46,7 @@ class Home extends StatelessWidget {
         ] : [],
         title: const Text("Recipes ${serverless? "[Offline]" : "[Online]"}")),
       body: FutureBuilder<List<Recipe>>(
-        future: Provider.of<RecipeRepository>(context).getRecipes(search: "noodles"),
+        future: Provider.of<RecipeRepository>(context).getAll(search: "noodles"),
         builder: (BuildContext context, AsyncSnapshot<List<Recipe>> snapshot) {
           if (snapshot.hasData){
               //actual data returned, now to display it in a list view
@@ -54,7 +54,7 @@ class Home extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final recipe = snapshot.data![index];
                   return ListTile(
-                    leading:  RecipeTile(),
+                    leading:  const RecipeTile(),
                     title: Text(recipe.title)
                   );
                 },
