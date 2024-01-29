@@ -13,7 +13,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return
-      Provider<RecipeRepository>(create: (_) => RecipeRepository(
+      ChangeNotifierProvider<RecipeRepository>(create: (_) => RecipeRepository(
           recipeApi: RecipeApi(baseUrl: baseUrl, apiKey: apiKey),
           recipeDao: RecipeDao()
       ),
@@ -31,7 +31,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: serverless ? [
+        actions: dataAccessMode == DataSource.localdb ? [
           TextButton(
             onPressed: () {
               Provider.of<RecipeRepository>(context, listen:false).sync();
@@ -44,7 +44,7 @@ class Home extends StatelessWidget {
             ),
           ),
         ] : [],
-        title: const Text("Recipes ${serverless? "[Offline]" : "[Online]"}")),
+        title: const Text("Recipes ${dataAccessMode == DataSource.localdb ? "[Offline]" : "[Online]"}")),
       body: FutureBuilder<List<Recipe>>(
         future: Provider.of<RecipeRepository>(context).getAll(search: "noodles"),
         builder: (BuildContext context, AsyncSnapshot<List<Recipe>> snapshot) {

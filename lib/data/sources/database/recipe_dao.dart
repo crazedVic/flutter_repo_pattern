@@ -12,10 +12,12 @@ class RecipeDao extends BaseDao{
   Future<void> insertAll(List<Recipe> recipes) async {
     final db = await getDatabase();
     final batch = db.batch();
+    batch.delete(BaseDao.recipeTableName);
     for (final recipe in recipes){
-      batch.delete(BaseDao.recipeTableName);
+
       batch.insert(BaseDao.recipeTableName, recipe.toRow());
     }
     await batch.commit();
+
   }
 }
