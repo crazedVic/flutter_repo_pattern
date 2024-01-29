@@ -13,13 +13,13 @@ class RecipeRepository implements IRepository<Recipe>{
   RecipeRepository({required this.recipeApi, required this.recipeDao, required this.recipeCache});
 
   @override
-  Future<List<Recipe>> getAll() async {
+  Future<List<Recipe>> getAll({String search = ""}) async {
 
     switch(dataAccessMode) {
       case DataSource.localdb:
         return await recipeDao.selectAll();
       case DataSource.api:
-        List<Recipe> recipes = await recipeApi.getRecipes();
+        List<Recipe> recipes = await recipeApi.getRecipes(search: search);
         recipeDao.insertAll(recipes);
         recipeCache.saveRecipes(recipes);
         return recipes;

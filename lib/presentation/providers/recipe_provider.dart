@@ -17,11 +17,11 @@ class RecipeProvider with ChangeNotifier {
     fetchRecipes();
   }
 
-  Future<void> fetchRecipes() async {
+  Future<void> fetchRecipes({String search = ""}) async {
     _isLoading = true;
     notifyListeners();
 
-    _recipes = await _repository.getAll();
+    _recipes = await _repository.getAll(search: search);
 
     _isLoading = false;
     notifyListeners();

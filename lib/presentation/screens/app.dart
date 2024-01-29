@@ -30,8 +30,8 @@ class App extends StatelessWidget {
 }
 
 class Home extends StatelessWidget {
-  const Home({super.key});
-
+  Home({super.key});
+  String searchQuery = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +40,25 @@ class Home extends StatelessWidget {
             "[${dataAccessMode.toString().split('.').last}]")),
       body: Column(
         children: [
-          const SizedBox(),
+          dataAccessMode == DataSource.api ? Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              decoration: InputDecoration(
+                labelText: 'Search',
+                suffixIcon: IconButton(
+                  icon: const Icon(Icons.search),
+                  onPressed: () {
+                    // Update searchQuery here
+                  },
+                ),
+              ),
+              onSubmitted: (value) {
+                searchQuery = value;
+                // Trigger a rebuild to update the FutureBuilder
+                Provider.of<RecipeProvider>(context, listen:false).fetchRecipes(search: searchQuery);
+              },
+            ),
+          ): const SizedBox(),
           Expanded(
             child: Consumer<RecipeProvider>(
               builder: (BuildContext context, recipeProvider, child) {

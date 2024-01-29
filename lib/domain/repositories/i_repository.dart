@@ -1,3 +1,3 @@
 abstract class IRepository<T> {
-  Future<List<T>> getAll();
+  Future<List<T>> getAll({String search = ""});
 }
