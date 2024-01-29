@@ -9,15 +9,4 @@ class RecipeDao extends BaseDao{
     return List.generate(maps.length, (i) => Recipe.fromRow(maps[i]));
   }
 
-  Future<void> insertAll(List<Recipe> recipes) async {
-    final db = await getDatabase();
-    final batch = db.batch();
-    batch.delete(BaseDao.recipeTableName);
-    for (final recipe in recipes){
-
-      batch.insert(BaseDao.recipeTableName, recipe.toRow());
-    }
-    await batch.commit();
-
-  }
 }

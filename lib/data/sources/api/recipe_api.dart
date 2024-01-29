@@ -8,10 +8,10 @@ class RecipeApi {
 
   RecipeApi({required this.baseUrl, required this.apiKey});
 
-  Future<List<Recipe>> getRecipes(String search) async {
+  Future<List<Recipe>> getRecipes() async {
     try {
       final queryParameters = {
-        'query': search,
+        'query': "noodles",
         'offset': '0',
       };
       final uri =

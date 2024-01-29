@@ -14,7 +14,6 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return
-      // ChangeNotifierProvider<RecipeRepository>(create: (_) => RecipeRepository(
       ChangeNotifierProvider(
         create: (context) =>
             RecipeProvider(
@@ -33,49 +32,15 @@ class App extends StatelessWidget {
 class Home extends StatelessWidget {
   const Home({super.key});
 
-
-
   @override
   Widget build(BuildContext context) {
-    String searchQuery = 'noodles';
     return Scaffold(
       appBar: AppBar(
-        actions: dataAccessMode != DataSource.api ? [
-          TextButton(
-            onPressed: () {
-              Provider.of<RecipeProvider>(context, listen:false).sync();
-            },
-            child: const Text(
-              'Sync',
-              style: TextStyle(
-                color: Colors.black, // Text color (use a contrasting color for better visibility)
-              ),
-            ),
-          ),
-        ] : [],
         title: Text("Recipes "
             "[${dataAccessMode.toString().split('.').last}]")),
       body: Column(
         children: [
-          dataAccessMode == DataSource.api ? Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              decoration: InputDecoration(
-                labelText: 'Search',
-                suffixIcon: IconButton(
-                  icon: const Icon(Icons.search),
-                  onPressed: () {
-                    // Update searchQuery here
-                  },
-                ),
-              ),
-              onSubmitted: (value) {
-                searchQuery = value;
-                // Trigger a rebuild to update the FutureBuilder
-                Provider.of<RecipeProvider>(context, listen:false).fetchRecipes(searchQuery);
-              },
-            ),
-          ): const SizedBox(),
+          const SizedBox(),
           Expanded(
             child: Consumer<RecipeProvider>(
               builder: (BuildContext context, recipeProvider, child) {
