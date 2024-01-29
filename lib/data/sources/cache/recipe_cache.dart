@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class RecipeCache {
   static const String _recipesKey = 'recipes';
 
-  Future<List<Recipe>> getRecipes(String search) async {
+  Future<List<Recipe>> getRecipes() async {
     final prefs = await SharedPreferences.getInstance();
 
     // Get the string stored in shared preferences
@@ -23,7 +23,7 @@ class RecipeCache {
     // Filter the recipes based on the search term and convert them to Recipe objects
     return recipesList
         .map((recipeMap) => Recipe.fromJson(recipeMap))
-        .where((recipe) => recipe.title.contains(search)) // Assuming Recipe has a 'name' field
+      //  .where((recipe) => recipe.title.contains(search)) // Assuming Recipe has a 'name' field
         .toList();
   }
 
@@ -31,7 +31,8 @@ class RecipeCache {
     final prefs = await SharedPreferences.getInstance();
 
     // Convert the list of recipes to a JSON string
-    final String recipesJson = json.encode(recipes.map((recipe) => Recipe.recipeToJson(recipe)).toList());
+    final String recipesJson = json.encode(recipes.map((recipe) =>
+        Recipe.recipeToJson(recipe)).toList());
 
     // Save the JSON string in shared preferences
     await prefs.setString(_recipesKey, recipesJson);
