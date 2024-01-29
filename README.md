@@ -1,6 +1,7 @@
-# repopattern
+## Repository Pattern with some Clean Architecture
 
-Repo Pattern with Api and SharedPref
+Repo Pattern with Api, Sqlite, SharedPreferences, and using Provider, all in a clean architecture 
+folder structure.
 
 ## Getting Started
 
