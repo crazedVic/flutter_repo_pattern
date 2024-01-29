@@ -30,10 +30,11 @@ class App extends StatelessWidget {
 }
 
 class Home extends StatelessWidget {
-  Home({super.key});
-  String searchQuery = "";
+  const Home({super.key});
+
   @override
   Widget build(BuildContext context) {
+    String searchQuery = "";
     return Scaffold(
       appBar: AppBar(
         title: Text("Recipes "
