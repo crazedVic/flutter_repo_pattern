@@ -12,7 +12,7 @@ class RecipeApi {
     try {
       // unfortunately this api requires a search string
       final queryParameters = {
-        'query': "noodles",
+        'query': "almonds",
         'offset': '0',
       };
       final uri =

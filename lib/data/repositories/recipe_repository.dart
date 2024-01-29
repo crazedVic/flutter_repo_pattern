@@ -19,7 +19,10 @@ class RecipeRepository implements IRepository<Recipe>{
       case DataSource.localdb:
         return await recipeDao.selectAll();
       case DataSource.api:
-        return await recipeApi.getRecipes();
+        List<Recipe> recipes = await recipeApi.getRecipes();
+        recipeDao.insertAll(recipes);
+        recipeCache.saveRecipes(recipes);
+        return recipes;
       case DataSource.cache:
         return await recipeCache.getRecipes();
     }

@@ -27,4 +27,14 @@ class RecipeCache {
         .toList();
   }
 
+  Future<void> saveRecipes(List<Recipe> recipes) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    // Convert the list of recipes to a JSON string
+    final String recipesJson = json.encode(recipes.map((recipe) =>
+        Recipe.recipeToJson(recipe)).toList());
+
+    // Save the JSON string in shared preferences
+    await prefs.setString(_recipesKey, recipesJson);
+  }
 }

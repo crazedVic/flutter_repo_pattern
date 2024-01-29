@@ -21,7 +21,7 @@ abstract class BaseDao {
     batch.execute(
         '''
           CREATE TABLE $recipeTableName(
-          title TEXT PRIMARY KEY NOT NULL,
+          title TEXT NOT NULL,
           ingredients TEXT NOT NULL,
           servings TEXT NOT NULL,
           instructions TEXT NOT NULL);
