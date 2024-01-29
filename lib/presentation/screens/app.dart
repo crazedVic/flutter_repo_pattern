@@ -54,9 +54,10 @@ class Home extends StatelessWidget {
                 ),
               ),
               onSubmitted: (value) {
-                searchQuery = value;
                 // Trigger a rebuild to update the FutureBuilder
-                Provider.of<RecipeProvider>(context, listen:false).fetchRecipes(search: searchQuery);
+                if(value.isNotEmpty) {
+                  Provider.of<RecipeProvider>(context, listen:false).fetchRecipes(search: searchQuery);
+                }
               },
             ),
           ): const SizedBox(),
