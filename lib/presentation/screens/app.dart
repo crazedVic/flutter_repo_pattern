@@ -7,6 +7,7 @@ import '../../data/repositories/recipe_repository.dart';
 import '../../data/sources/api/recipe_api.dart';
 import '../providers/recipe_provider.dart';
 import '../widgets/recipe_tile.dart';
+import '../widgets/text_search_widget.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -34,32 +35,15 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String searchQuery = "";
     return Scaffold(
       appBar: AppBar(
         title: Text("Recipes "
             "[${dataAccessMode.toString().split('.').last}]")),
       body: Column(
         children: [
-          dataAccessMode == DataSource.api ? Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              decoration: InputDecoration(
-                labelText: 'Search',
-                suffixIcon: IconButton(
-                  icon: const Icon(Icons.search),
-                  onPressed: () {
-                    // Update searchQuery here
-                  },
-                ),
-              ),
-              onSubmitted: (value) {
-                // Trigger a rebuild to update the FutureBuilder
-                if(value.isNotEmpty) {
-                  Provider.of<RecipeProvider>(context, listen:false).fetchRecipes(search: searchQuery);
-                }
-              },
-            ),
+          dataAccessMode == DataSource.api ? const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: TextSearchWidget(),
           ): const SizedBox(),
           Expanded(
             child: Consumer<RecipeProvider>(
@@ -91,6 +75,3 @@ class Home extends StatelessWidget {
     );
   }
 }
-
-
-
