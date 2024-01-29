@@ -10,6 +10,7 @@ class RecipeApi {
 
   Future<List<Recipe>> getRecipes() async {
     try {
+      // unfortunately this api requires a search string
       final queryParameters = {
         'query': "noodles",
         'offset': '0',
@@ -23,17 +24,7 @@ class RecipeApi {
         if(response.statusCode < 300) {
           Iterable list = json.decode(response.body);
           List<Recipe> recipes;
-          //recipes = list.map((model) => Recipe.fromJson(model)).toList();
-          // avoid duplicate recipe titles as this is primary key (bad data in sample api)
-          Set<String> addedTitles = <String>{};
-          recipes = list.map((model) => Recipe.fromJson(model)).where((recipe) {
-            if (!addedTitles.contains(recipe.title)) {
-              addedTitles.add(recipe.title);
-              return true;
-            }
-            return false;
-          }).toList();
-
+          recipes = list.map((model) => Recipe.fromJson(model)).toList();
           return recipes;
         } else {
           throw Exception("could not parse response");

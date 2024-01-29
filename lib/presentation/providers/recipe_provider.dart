@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import '../../data/repositories/recipe_repository.dart';
 import '../../domain/entities/recipe.dart';
 
-
 class RecipeProvider with ChangeNotifier {
   bool _isLoading = false;
   final RecipeRepository _repository;
