@@ -15,12 +15,12 @@ database, no services, nothing.  And yet, the product felt good, felt complete. 
 long road getting there, with tons of small and big tweaks.  I was not required to set up the 
 backend services, but if I had been,  it would have taken 3x the time and 4x the cost.
 
-So now that I’ve explained the why, let’s look at the how.  For this demonstration I’ll be using the
-[Flutter](https://flutter.dev/) framework, with the [Provider](https://pub.dev/packages/provider) 
-package for state management, and the [Repository Pattern](https://deviq.com/design-patterns/repository-pattern). 
-What is the repository 
-pattern?  It basically creates a bridge between the app you see and the data that drives the app.  
-And that bridge can be rotated to different sources, one where the data lives on the device or 
+So now that I’ve explained the why, let’s look at the how.  For this demonstration I’ll be developing 
+a mobile application using the [Flutter](https://flutter.dev/) framework, with 
+the [Provider](https://pub.dev/packages/provider) package for state management, and the 
+[Repository Pattern](https://deviq.com/design-patterns/repository-pattern).  What is the 
+repository pattern?  It basically creates a bridge between the app you see and the data that drives 
+the app.  And that bridge can be rotated to different sources, one where the data lives on the device or 
 one where the data lives on the cloud.  The app itself, the part you see, doesn't know nor care 
 about that.  It asks for data, and it gets it, no questions asked.  That’s the beauty of the 
 Repository Pattern.  Let’s see how it breaks down.
@@ -30,7 +30,7 @@ splits the app into 3 parts - the Data, the Domain and the Presentation.  The Do
 the contract, the Presentation will contain the parts you see when you launch the app, and the 
 Data will handle, well, the data.
 
-First I’ll create a constant variable in a -_shared/data.dart_ file that will tell the repository 
+First I’ll create a constant variable in a _shared/data.dart_ file that will tell the repository 
 where the data will live. For prototyping we will use local data, and later, when we are ready 
 to build out the backend services, we can switch it to API.
 ```
@@ -49,8 +49,8 @@ abstract class IRepository<T> {
 ```
 
 Now we implement this interface in _data/repositories_.  You can see here I’ll have the 
-bridge pointing to a REST API and a Sqlite local database using package _[sqfilte](https://pub.dev/packages/sqflite)_.  
-For now we will use DataSource.localdb.
+bridge pointing to a REST API and a Sqlite local database using package 
+_[sqfilte](https://pub.dev/packages/sqflite)_.  For now we will use DataSource.localdb.
 ```
 class RecipeRepository implements IRepository<Recipe>{
   final RecipeAPI recipeAPI;
@@ -113,8 +113,7 @@ class RecipeDAO extends BaseDAO{
 ```
 
 Ok now that we have our sqlite datasource, we’ve set up our repository to pull the data 
-from here, and we’ve established the interface, we can create 
-the Recipe entity in _domain/entities_.
+from here, and we’ve established the interface, we can create the Recipe entity in _domain/entities_.
 ```
 class Recipe{
   final String title;
@@ -170,8 +169,8 @@ class RecipeProvider with ChangeNotifier {
 ```
 
 As you can see, the only class that is aware of where the data actually lives
-is the RecipeRepository class, the rest of the application exists in ignorant bliss.  
-Finally we create the main screen in _presentation/screens_ using Provider to manage the state.
+is the RecipeRepository class, the rest of the application exists in ignorant bliss.  Finally 
+we create the main screen in _presentation/screens_ using Provider to manage the state.
 ```
 class App extends StatelessWidget {
   const App({super.key});
