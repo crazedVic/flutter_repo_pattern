@@ -9,11 +9,11 @@ good thing.  And expensive.  And time consuming.
 
 With rich client frameworks like Flutter, however, you can focus on just the product that people 
 use, and worry about building all the behind the scenes technology after your product feels 
-“done”.  A few years ago, after many iterations, feedback and builds, I completed a prototype 
-mobile app for a client.  It seemed so functionally complete, I had difficulty convincing them that 
+“done”.  A few years ago, after many iterations, feedback and builds, we completed a prototype 
+mobile app for a client.  It seemed so functionally complete, we had difficulty convincing them that 
 it was not actually "ready to ship".  In fact, behind that app there was actually nothing; no 
-database, no services, nothing.  And yet the product felt good, felt complete.  Had I set up all these 
-backend services, it would have taken 3x the time and 4x the cost.  And the best part, I could now 
+database, no services, nothing.  And yet the product felt good, felt complete.  Had we set up all these 
+backend services, it would have taken 3x the time and 4x the cost.  And the best part, we could now 
 focus on just building out the backend in one shot, no longer having to worry about any further
 feature creep or changes in functionality, saving time and money.
 
@@ -267,4 +267,5 @@ The Repository Pattern, in tandem with Clean Architecture and Provider, keeps
 the code clean and easy to update/maintain when building a backend-less prototype. 
 Backend-less prototyping means you can iterate faster, cheaper and every change 
 you make will most likely be something the client can see and experience, and appreciate.  If you 
-want to learn more or need help with an app idea or existing project, [contact us](https://www.appsquire.com/#Contact-Us) today.
+want to learn more or need help with an app idea or existing project, 
+[contact us](https://www.appsquire.com/#Contact-Us) today.
