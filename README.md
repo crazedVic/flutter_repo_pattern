@@ -93,7 +93,10 @@ class Recipe{
   final String servings;
   final String instructions;
 
-Recipe({required this.title, required this.ingredients, required this.servings, required this.instructions}); }
+Recipe({required this.title, 
+    required this.ingredients, 
+    required this.servings, 
+    required this.instructions}); }
 
   Recipe.fromRow(Map<String, dynamic> map)
     : title = map['title'] as String,
