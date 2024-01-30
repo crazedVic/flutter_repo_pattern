@@ -33,7 +33,8 @@ the contracts and the business entities, the Presentation will contain the parts
 you launch the app, and the Data will handle, well, the data.  
 
 Here's a diagram for you to follow along.  
-![Screenshot 2024-01-30 at 12 25 36 PM](https://github.com/crazedVic/flutter_repo_pattern/assets/5771026/73ac92c2-b176-47ae-a211-003498b81f14)
+<img width="800" alt="Screenshot 2024-01-30 at 13 22 12" src="https://github.com/crazedVic/flutter_repo_pattern/assets/5771026/28cbf078-619f-4966-913a-2777b67d8708">
+
 
 
 First I’ll create a constant variable in a _shared/data.dart_ file that will tell the repository 
