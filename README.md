@@ -17,14 +17,15 @@ enum DataSource {
 }
 ```
 
-Then we create the repository contract, this lives in domain/repositories
+Then we create the repository contract, this lives in _domain/repositories_.
 ```
 abstract class IRepository<T> {
   Future<List<T>> getAll();
 }
 ```
 
-Now we implement this interface in data/repositories.  You can see here I’ll have the bridge pointable to a REST Api and a Sqlite local database using package sqfilte.  For now we will use DataSource.localdb.
+Now we implement this interface in _data/repositories_.  You can see here I’ll have the bridge pointing
+to a REST Api and a Sqlite local database using package _sqfilte_.  For now we will use DataSource.localdb.
 ```
 lass RecipeRepository implements IRepository<Recipe>{
   final RecipeApi recipeApi;
@@ -44,7 +45,8 @@ lass RecipeRepository implements IRepository<Recipe>{
 }
 ```
 
-Now we implement the sqlite datasource (one could choose to use SharedPreferences instead here) in data/sources:
+Now we implement the sqlite datasource (one could choose to use 
+SharedPreferences instead here) in _data/sources_:
 ```
 abstract class BaseDao {
   static const databaseName = "database.sqlite";
