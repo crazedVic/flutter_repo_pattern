@@ -17,7 +17,7 @@ backend services, it would have taken 3x the time and 4x the cost.  And the best
 focus on just building out the backend in one shot, no longer having to worry about any further
 feature creep or changes in functionality, saving time and money.
 
-So now that I’ve explained the "why", let’s examine the "how".  For this demonstration I’ll be developing 
+So now that we’ve explained the "why", let’s examine the "how".  For this demonstration we’ll be developing 
 a mobile application using the [Flutter](https://flutter.dev/) framework, with 
 the [Provider](https://pub.dev/packages/provider) package for state management, and the 
 [Repository Pattern](https://deviq.com/design-patterns/repository-pattern).  What is the 
