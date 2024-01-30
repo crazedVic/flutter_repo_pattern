@@ -9,11 +9,13 @@ good thing.  And expensive.  And time consuming.
 
 With rich client frameworks like Flutter, however, you can focus on just the product that people 
 use, and worry about building all the behind the scenes technology after your product feels 
-“done”.  A few years ago I built a prototype for a client where they were convinced the product 
-was ready to ship.  The fact was that behind that app there was actually nothing, no 
-database, no services, nothing.  And yet, the product felt good, felt complete.  But it was a 
-long road getting there, with tons of small and big tweaks.  I was not required to set up the 
-backend services, but if I had been,  it would have taken 3x the time and 4x the cost.
+“done”.  A few years ago, after many iterations, feedback and builds, I completed a prototype 
+mobile app for a client.  It seemed so functionally complete, I had difficulty convincing them that 
+it was not actually "ready to ship".  In fact, behind that app there was actually nothing; no 
+database, no services, nothing.  And yet the product felt good, felt complete.  Had I set up all these 
+backend services, it would have taken 3x the time and 4x the cost.  And the best part, I could now 
+focus on just building out the backend in one shot, no longer having to worry about any further
+feature creep or changes in functionality, saving time and money.
 
 So now that I’ve explained the "why", let’s examine the "how".  For this demonstration I’ll be developing 
 a mobile application using the [Flutter](https://flutter.dev/) framework, with 
@@ -41,7 +43,8 @@ enum DataSource {
 }
 ```
 
-Then we create the repository contract, this lives in _domain/repositories_.
+Then we create the repository contract using [generics](https://dart.dev/language/generics) <T> so 
+that we can use it for all entities not just Recipe, this lives in _domain/repositories_.
 ```
 abstract class IRepository<T> {
   Future<List<T>> getAll();
