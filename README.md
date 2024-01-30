@@ -15,7 +15,7 @@ database, no services, nothing.  And yet, the product felt good, felt complete. 
 long road getting there, with tons of small and big tweaks.  I was not required to set up the 
 backend services, but if I had been,  it would have taken 3x the time and 4x the cost.
 
-So now that I’ve explained the why, let’s look at the how.  For this demonstration I’ll be developing 
+So now that I’ve explained the "why", let’s examine the "how".  For this demonstration I’ll be developing 
 a mobile application using the [Flutter](https://flutter.dev/) framework, with 
 the [Provider](https://pub.dev/packages/provider) package for state management, and the 
 [Repository Pattern](https://deviq.com/design-patterns/repository-pattern).  What is the 
