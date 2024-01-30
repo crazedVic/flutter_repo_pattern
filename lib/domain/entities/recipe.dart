@@ -31,5 +31,5 @@ class Recipe{
     'servings': servings,
     'instructions': instructions,
   };
-  Recipe({required this.title, required this.ingredients, required this.servings, required this.instructions}); // this method lives in the generated class file ***.g.dart
+  Recipe({required this.title, required this.ingredients, required this.servings, required this.instructions});
 }

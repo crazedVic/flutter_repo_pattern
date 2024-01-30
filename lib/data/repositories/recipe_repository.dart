@@ -27,5 +27,4 @@ class RecipeRepository implements IRepository<Recipe>{
         return await recipeCache.getRecipes();
     }
   }
-
 }
