@@ -10,33 +10,34 @@ good thing.  And expensive.  And time consuming.
 With rich client frameworks like Flutter, however, you can focus on just the product that people 
 use, and worry about building all the behind the scenes technology after your product feels 
 “done”.  A few years ago I built a prototype for a client where they were convinced the product 
-was ready to ship.  The fact was that behind that mobile app there was actually nothing, no 
+was ready to ship.  The fact was that behind that app there was actually nothing, no 
 database, no services, nothing.  And yet, the product felt good, felt complete.  But it was a 
-long road getting there, with tons of small and big tweaks.  If I had been required to iterate on 
-not just the app but all the supporting backend services, it would have taken 6 months, not 6 
-weeks.  And at least four times the cost.
+long road getting there, with tons of small and big tweaks.  I was not required to set up the 
+backend services, but if I had been,  it would have taken 3x the time and 4x the cost.
 
-So now that I’ve explained the why, let’s look at the how.  For this demonstration I’ll be using 
-Flutter, Provider for state management, and the Repository pattern.  What is the repository 
+So now that I’ve explained the why, let’s look at the how.  For this demonstration I’ll be using the
+[Flutter](https://flutter.dev/) framework, with the [Provider](https://pub.dev/packages/provider) 
+package for state management, and the [Repository Pattern](https://deviq.com/design-patterns/repository-pattern). 
+What is the repository 
 pattern?  It basically creates a bridge between the app you see and the data that drives the app.  
 And that bridge can be rotated to different sources, one where the data lives on the device or 
 one where the data lives on the cloud.  The app itself, the part you see, doesn't know nor care 
 about that.  It asks for data, and it gets it, no questions asked.  That’s the beauty of the 
-repository pattern.  Let’s see how it breaks down.
+Repository Pattern.  Let’s see how it breaks down.
 
-For sake of cleanliness, I’ll be using a folder structure inspired by clean architecture, which 
-splits the app into 3 parts - the data, the domain and the presentation.  The domain will contain 
-the contract, the presentation will contain the parts you see when you launch the app, and the 
-data will handle, well, the data.
+For sake of cleanliness, I’ll be using a folder structure inspired by [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html), which 
+splits the app into 3 parts - the Data, the Domain and the Presentation.  The Domain will contain 
+the contract, the Presentation will contain the parts you see when you launch the app, and the 
+Data will handle, well, the data.
 
 First I’ll create a constant variable in a -_shared/data.dart_ file that will tell the repository 
-where the data will live, for prototyping this will be local, and later, when we are ready 
-to build out the backend services, we can switch it to api.
+where the data will live. For prototyping we will use local data, and later, when we are ready 
+to build out the backend services, we can switch it to API.
 ```
 const DataSource dataAccessMode = DataSource.localdb;
 enum DataSource {
   localdb,
-  api
+  API
 }
 ```
 
@@ -48,22 +49,22 @@ abstract class IRepository<T> {
 ```
 
 Now we implement this interface in _data/repositories_.  You can see here I’ll have the 
-bridge pointing to a REST Api and a Sqlite local database using package _sqfilte_.  
+bridge pointing to a REST API and a Sqlite local database using package _[sqfilte](https://pub.dev/packages/sqflite)_.  
 For now we will use DataSource.localdb.
 ```
-lass RecipeRepository implements IRepository<Recipe>{
-  final RecipeApi recipeApi;
-  final RecipeDao recipeDao;
+class RecipeRepository implements IRepository<Recipe>{
+  final RecipeAPI recipeAPI;
+  final RecipeDAO recipeDAO; //Data Access Object
 
-  RecipeRepository({required this.recipeApi, required this.recipeDao});
+  RecipeRepository({required this.recipeAPI, required this.recipeDAO});
 
   @override
   Future<List<Recipe>> getAll() async {
     switch(dataAccessMode) {
       case DataSource.localdb:
-        return await recipeDao.selectAll();
-      case DataSource.api:
-        return await recipeApi.getRecipes();
+        return await recipeDAO.selectAll();
+      case DataSource.API:
+        return await recipeAPI.getRecipes();
     }
   }
 }
@@ -72,7 +73,7 @@ lass RecipeRepository implements IRepository<Recipe>{
 Now we implement the sqlite datasource (one could choose to use 
 SharedPreferences instead here) in _data/sources_:
 ```
-abstract class BaseDao {
+abstract class BaseDAO {
   static const databaseName = "database.sqlite";
   static const recipeTableName = "recipes";
 
@@ -100,12 +101,12 @@ abstract class BaseDao {
   }
 }
 
-class RecipeDao extends BaseDao{
+class RecipeDAO extends BaseDAO{
 
   Future<List<Recipe>> selectAll() async {
     final db = await getDatabase();
     final List<Map<String, dynamic>> maps =
-        await db.query(BaseDao.recipeTableName);
+        await db.query(BaseDAO.recipeTableName);
     return List.generate(maps.length, (i) => Recipe.fromRow(maps[i]));
   }
 }
@@ -169,7 +170,7 @@ class RecipeProvider with ChangeNotifier {
 ```
 
 As you can see, the only class that is aware of where the data actually lives
-is the Repository class, the rest of the application exists in ignorant bliss.  
+is the RecipeRepository class, the rest of the application exists in ignorant bliss.  
 Finally we create the main screen in _presentation/screens_ using Provider to manage the state.
 ```
 class App extends StatelessWidget {
@@ -182,8 +183,8 @@ class App extends StatelessWidget {
         create: (context) =>
             RecipeProvider(
                 RecipeRepository(
-                    recipeApi: RecipeApi(),
-                    recipeDao: RecipeDao()
+                    recipeAPI: RecipeAPI(),
+                    recipeDAO: RecipeDAO()
                 )),
       child: const MaterialApp(
         home: Home(),
