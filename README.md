@@ -26,7 +26,7 @@ about that.  It asks for data, and it gets it, no questions asked.  That’s the
 Repository Pattern.  Let’s see how it breaks down.
 
 For sake of cleanliness, I’ll be using a folder structure inspired by [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html), which 
-splits the app into 3 parts - the *Data*, the *Domain* and the *Presentation*.  The Domain will contain 
+splits the app into 3 parts - the **Data**, the **Domain** and the **Presentation**.  The Domain will contain 
 the contracts and the business entities, the Presentation will contain the parts you see when 
 you launch the app, and the Data will handle, well, the data.
 
