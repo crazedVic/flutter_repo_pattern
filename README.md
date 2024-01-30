@@ -30,7 +30,11 @@ Repository Pattern.  Let’s see how it breaks down.
 For sake of cleanliness, I’ll be using a folder structure inspired by [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html), which 
 splits the app into 3 parts - the **Data**, the **Domain** and the **Presentation**.  The Domain will contain 
 the contracts and the business entities, the Presentation will contain the parts you see when 
-you launch the app, and the Data will handle, well, the data.
+you launch the app, and the Data will handle, well, the data.  
+
+Here's a diagram for you to follow along.  
+![Screenshot 2024-01-30 at 12 25 36 PM](https://github.com/crazedVic/flutter_repo_pattern/assets/5771026/73ac92c2-b176-47ae-a211-003498b81f14)
+
 
 First I’ll create a constant variable in a _shared/data.dart_ file that will tell the repository 
 where the data will live. For prototyping we will use local data, and later, when we are ready 
