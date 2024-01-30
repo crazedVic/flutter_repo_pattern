@@ -266,4 +266,5 @@ void main() {
 The Repository Pattern, in tandem with Clean Architecture and Provider, keeps 
 the code clean and easy to update/maintain when building a backend-less prototype. 
 Backend-less prototyping means you can iterate faster, cheaper and every change 
-you make will most likely be something the client can see and experience, and appreciate. 
+you make will most likely be something the client can see and experience, and appreciate.  If you 
+want to learn more or need help with an app idea or existing project, [contact us](https://www.appsquire.com/#Contact-Us) today.
